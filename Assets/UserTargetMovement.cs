@@ -8,12 +8,12 @@ public class UserTargetMovement : MonoBehaviour
 
     private CharacterController controller;
 
-    void Awake()
+    private void Awake()
     {
         controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
         Keyboard keyboard = Keyboard.current;
 
@@ -34,7 +34,7 @@ public class UserTargetMovement : MonoBehaviour
         if (keyboard.dKey.isPressed)
             direction.x += 1f;
 
-        // 通过角色控制器移动，让墙壁可以阻挡小球。
+        // 归一化输入以保持斜向速度一致，碰撞阻挡交给角色控制器。
         controller.Move(
             direction.normalized * moveSpeed * Time.deltaTime);
     }

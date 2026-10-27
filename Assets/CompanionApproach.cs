@@ -1,8 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using TMPro;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class CompanionApproach : MonoBehaviour
@@ -26,7 +26,15 @@ public class CompanionApproach : MonoBehaviour
     public float guideWaitDistance = 3.5f;
     public float guideResumeDistance = 2.5f;
 
-    private enum Activity { Following, TurningToUser, Choosing, Guiding, Arrived }
+    private enum Activity
+    {
+        Following,
+        TurningToUser,
+        Choosing,
+        Guiding,
+        Arrived
+    }
+
     private Activity activity = Activity.Following;
     private NavMeshAgent agent;
     private NavMeshPath route;
@@ -39,7 +47,7 @@ public class CompanionApproach : MonoBehaviour
     private float greetingEndTime;
     private Vector3 guideDestination;
 
-    void Start()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         route = new NavMeshPath();
@@ -48,7 +56,7 @@ public class CompanionApproach : MonoBehaviour
         SetChoicesVisible(false);
         ClearGreeting();
 
-        // 自动连接点击事件，不需要手动配置按钮的 On Click。
+        // 按钮事件由脚本绑定。
         if (acceptButton != null)
             acceptButton.onClick.AddListener(AcceptInvitation);
         if (declineButton != null)
@@ -57,7 +65,7 @@ public class CompanionApproach : MonoBehaviour
             waitButton.onClick.AddListener(RequestReconsideration);
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (acceptButton != null)
             acceptButton.onClick.RemoveListener(AcceptInvitation);
@@ -67,85 +75,83 @@ public class CompanionApproach : MonoBehaviour
             waitButton.onClick.RemoveListener(RequestReconsideration);
     }
 
-    bool CanNavigate()
+    private bool CanNavigate()
     {
         return agent != null && agent.enabled && agent.isOnNavMesh;
     }
 
-    void SetChoicesVisible(bool visible)
+    private void SetChoicesVisible(bool visible)
     {
         // 选择按钮与“等一下”按钮互斥；暂停期间全部隐藏。
         bool choosing = visible && !interactionPaused && activity == Activity.Choosing;
         bool canCall = visible && !interactionPaused && invitationOffered &&
             activity != Activity.Choosing && activity != Activity.TurningToUser;
-        if (acceptButton != null)
-        {
-            acceptButton.gameObject.SetActive(choosing);
-            acceptButton.interactable = true;
-            TMP_Text label = acceptButton.GetComponentInChildren<TMP_Text>(true);
-            if (label != null)
-                label.text = reconsidering ? "Go together" : "Yes, let's go";
-        }
-        if (declineButton != null)
-        {
-            declineButton.gameObject.SetActive(choosing);
-            declineButton.interactable = true;
-            TMP_Text label = declineButton.GetComponentInChildren<TMP_Text>(true);
-            if (label != null)
-                label.text = reconsidering ? "Stay with me" : "Not now";
-        }
-        if (waitButton != null)
-        {
-            waitButton.gameObject.SetActive(canCall);
-            waitButton.interactable = true;
-            TMP_Text label = waitButton.GetComponentInChildren<TMP_Text>(true);
-            if (label != null)
-                label.text = "Wait a moment";
-        }
+
+        UpdateButton(acceptButton, choosing,
+            reconsidering ? "Go together" : "Yes, let's go");
+        UpdateButton(declineButton, choosing,
+            reconsidering ? "Stay with me" : "Not now");
+        UpdateButton(waitButton, canCall, "Wait a moment");
     }
 
-    void ClearGreeting()
+    private static void UpdateButton(Button button, bool visible, string text)
+    {
+        if (button == null)
+            return;
+
+        button.gameObject.SetActive(visible);
+        button.interactable = true;
+
+        TMP_Text label = button.GetComponentInChildren<TMP_Text>(true);
+        if (label != null)
+            label.text = text;
+    }
+
+    private void ClearGreeting()
     {
         if (greetingText != null)
             greetingText.text = "";
     }
 
-    void ShowMessage(string message, bool persistent = false)
+    private void ShowMessage(string message, bool persistent = false)
     {
         CancelInvoke(nameof(ClearGreeting));
         if (greetingText == null)
             return;
+
         greetingText.text = message;
         if (!persistent)
             Invoke(nameof(ClearGreeting), 3f);
     }
 
-    void StopMoving()
+    private void StopMoving()
     {
         if (!CanNavigate())
             return;
+
         agent.isStopped = true;
         agent.ResetPath();
     }
 
-    Vector3 FlatDirection(Vector3 position)
+    private Vector3 FlatDirection(Vector3 position)
     {
         Vector3 direction = position - transform.position;
         direction.y = 0f;
         return direction;
     }
 
-    void FaceDirection(Vector3 direction)
+    private void FaceDirection(Vector3 direction)
     {
         direction.y = 0f;
         if (direction.sqrMagnitude < 0.001f)
             return;
+
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation, Quaternion.LookRotation(direction),
             turnSpeed * Time.deltaTime);
     }
 
-    bool IsBlocked()
+    private bool IsBlocked()
     {
         return Physics.Linecast(
             transform.position + Vector3.down * 0.25f,
@@ -153,13 +159,13 @@ public class CompanionApproach : MonoBehaviour
             obstructionLayers, QueryTriggerInteraction.Ignore);
     }
 
-    bool FindGround(Vector3 position, out NavMeshHit hit)
+    private bool FindGround(Vector3 position, out NavMeshHit hit)
     {
         position.y = transform.position.y - agent.baseOffset;
         return NavMesh.SamplePosition(position, out hit, 0.75f, agent.areaMask);
     }
 
-    void OfferInvitation()
+    private void OfferInvitation()
     {
         StopMoving();
         invitationOffered = true;
@@ -167,6 +173,7 @@ public class CompanionApproach : MonoBehaviour
         ShowMessage("Would you like to come over here with me?", true);
         SetChoicesVisible(true);
     }
+
     public void AcceptInvitation()
     {
         if (!invitationOffered || activity != Activity.Choosing ||
@@ -221,7 +228,7 @@ public class CompanionApproach : MonoBehaviour
         ShowMessage("Yes?", true);
     }
 
-    void UpdateGuiding(Vector3 userDirection)
+    private void UpdateGuiding(Vector3 userDirection)
     {
         // 停下和继续使用不同距离，避免在边界附近反复停走。
         float waitDistance = Mathf.Max(0.2f, guideWaitDistance);
@@ -246,6 +253,7 @@ public class CompanionApproach : MonoBehaviour
             waitingForUser = false;
             ShowMessage("Ready? Let's continue.");
         }
+
         if (FlatDirection(guideDestination).magnitude <= 0.35f)
         {
             StopMoving();
@@ -256,7 +264,7 @@ public class CompanionApproach : MonoBehaviour
             return;
         }
 
-        // 拒绝不完整路线，避免目的地不可达时仍然假装带路。
+        // 只接受能到达目的地的完整路线。
         if (!agent.CalculatePath(guideDestination, route) ||
             route.status != NavMeshPathStatus.PathComplete)
         {
@@ -290,7 +298,7 @@ public class CompanionApproach : MonoBehaviour
         FaceDirection(agent.steeringTarget - transform.position);
     }
 
-    void Update()
+    private void HandleKeyboardInput()
     {
         Keyboard keyboard = Keyboard.current;
         if (keyboard != null)
@@ -322,9 +330,15 @@ public class CompanionApproach : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Update()
+    {
+        HandleKeyboardInput();
 
         if (!CanNavigate())
             return;
+
         if (interactionPaused || userTarget == null)
         {
             StopMoving();
@@ -354,13 +368,7 @@ public class CompanionApproach : MonoBehaviour
             UpdateGuiding(direction);
             return;
         }
-        if (activity == Activity.Arrived)
-        {
-            StopMoving();
-            FaceDirection(direction);
-            return;
-        }
-        if (activity == Activity.Choosing)
+        if (activity == Activity.Arrived || activity == Activity.Choosing)
         {
             StopMoving();
             FaceDirection(direction);
@@ -399,7 +407,7 @@ public class CompanionApproach : MonoBehaviour
             return;
         }
 
-        // 舒适距离过近时，保留原来的退让行为。
+        // 退让目标必须位于身后可直达的导航区域。
         if (distance < personalDistance)
         {
             FaceDirection(direction);
@@ -417,7 +425,10 @@ public class CompanionApproach : MonoBehaviour
                 agent.isStopped = false;
                 agent.SetDestination(retreatHit.position);
             }
-            else StopMoving();
+            else
+            {
+                StopMoving();
+            }
             return;
         }
 
@@ -448,6 +459,7 @@ public class CompanionApproach : MonoBehaviour
         agent.SetDestination(targetHit.position);
         if (agent.desiredVelocity.sqrMagnitude > 0.01f)
             FaceDirection(agent.desiredVelocity);
-        else FaceDirection(direction);
+        else
+            FaceDirection(direction);
     }
 }
