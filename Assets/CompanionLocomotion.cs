@@ -14,7 +14,7 @@ public class CompanionLocomotion : MonoBehaviour
 
         characterAnimator.applyRootMotion = false;
     }
-    // Starter Assets 的走路动画包含脚步事件；当前演示不播放脚步声。
+    // Starter Assets walking clips contain footstep events; this demo has no footstep audio.
     private void OnFootstep(AnimationEvent animationEvent)
     {
     }
@@ -33,11 +33,11 @@ public class CompanionLocomotion : MonoBehaviour
             speed = velocity.magnitude;
         }
 
-        // 用实际速度混合站立和走路动作。
+        // Blend idle and walking animations using actual movement speed.
         characterAnimator.SetFloat(
             "Speed", speed, 0.1f, Time.deltaTime);
 
-        // 伙伴沿地面导航，保持动画的着地状态。
+        // Keep the animation grounded while the companion navigates along the floor.
         characterAnimator.SetBool("Grounded", true);
         characterAnimator.SetBool("Jump", false);
         characterAnimator.SetBool("FreeFall", false);

@@ -1,12 +1,11 @@
 # Asset sources
 
-| Asset | Source | Restore |
+| Asset | Source | Included files |
 | --- | --- | --- |
-| Armature character and locomotion clips | [Unity Technologies — First Person + Third Person Character Controllers](https://marketplace.unity.com/packages/3d/characters/first-person-third-person-character-controllers-196526) | Import Starter Assets in Unity |
-| Waving animation | [Mixamo](https://www.mixamo.com/) | Download the Waving clip and use `tools/Restore-Wave.ps1` |
-| Text resources and Liberation Sans | Unity TextMeshPro Essential Resources | Import TMP Essential Resources in Unity |
+| Armature character and locomotion | [Unity Technologies Starter Assets 2.0.1](https://marketplace.unity.com/packages/3d/characters/first-person-third-person-character-controllers-196526) | Character model, animation clips, materials, textures and accompanying character resources |
+| Waving animation | [Mixamo](https://www.mixamo.com/) | Import settings and restoration script; download the animation through [setup](docs/SETUP.md) |
+| Text resources and Liberation Sans | Unity TextMeshPro Essential Resources | Import through Unity as described in setup |
 
-The downloaded character, locomotion files, font resources and Mixamo FBX files are obtained from their respective sources. The repository includes the custom controller and wave import settings used to connect them to the demo. Refer to each provider's terms for the downloaded assets.
+The Unity Starter Assets character resources are copyright Unity Technologies and distributed under the [Unity Companion License](ThirdPartyLicenses/Unity-Companion-License.txt). The custom interaction scripts are by Shirui Fu.
 
-- [Mixamo FAQ](https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html)
-- [Unity asset licensing](https://unity.com/legal/as-terms)
+Mixamo raw animation files are restored separately. See the [Mixamo distribution FAQ](https://community.adobe.com/questions-696/mixamo-faq-licensing-royalties-ownership-eula-and-tos-589400?lang=en).

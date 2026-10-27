@@ -56,7 +56,7 @@ public class CompanionApproach : MonoBehaviour
         SetChoicesVisible(false);
         ClearGreeting();
 
-        // 按钮事件由脚本绑定。
+        // Bind button events in code.
         if (acceptButton != null)
             acceptButton.onClick.AddListener(AcceptInvitation);
         if (declineButton != null)
@@ -82,7 +82,7 @@ public class CompanionApproach : MonoBehaviour
 
     private void SetChoicesVisible(bool visible)
     {
-        // 选择按钮与“等一下”按钮互斥；暂停期间全部隐藏。
+        // Show either the choice buttons or the wait button; hide all buttons while paused.
         bool choosing = visible && !interactionPaused && activity == Activity.Choosing;
         bool canCall = visible && !interactionPaused && invitationOffered &&
             activity != Activity.Choosing && activity != Activity.TurningToUser;
@@ -219,7 +219,7 @@ public class CompanionApproach : MonoBehaviour
             activity == Activity.TurningToUser)
             return;
 
-        // 叫住只会中断当前安排；下一步选择才决定去哪里。
+        // Calling back interrupts the current plan; the next choice sets the destination.
         StopMoving();
         waitingForUser = false;
         reconsidering = true;
@@ -230,7 +230,7 @@ public class CompanionApproach : MonoBehaviour
 
     private void UpdateGuiding(Vector3 userDirection)
     {
-        // 停下和继续使用不同距离，避免在边界附近反复停走。
+        // Use separate stop and resume distances to avoid toggling near the boundary.
         float waitDistance = Mathf.Max(0.2f, guideWaitDistance);
         float resumeDistance = Mathf.Clamp(
             guideResumeDistance, 0.1f, waitDistance - 0.1f);
@@ -264,7 +264,7 @@ public class CompanionApproach : MonoBehaviour
             return;
         }
 
-        // 只接受能到达目的地的完整路线。
+        // Accept only complete paths to the destination.
         if (!agent.CalculatePath(guideDestination, route) ||
             route.status != NavMeshPathStatus.PathComplete)
         {
@@ -276,7 +276,7 @@ public class CompanionApproach : MonoBehaviour
             return;
         }
 
-        // 等到用户后，先原地转回路线方向，再恢复行走。
+        // Turn back toward the path before walking once the user catches up.
         if (turningBackToRoute)
         {
             StopMoving();
@@ -348,7 +348,7 @@ public class CompanionApproach : MonoBehaviour
         Vector3 direction = FlatDirection(userTarget.position);
         float distance = direction.magnitude;
 
-        // 先完成回看，再重新显示问题与选项。
+        // Finish turning toward the user before showing the question and choices.
         if (activity == Activity.TurningToUser)
         {
             StopMoving();
@@ -381,7 +381,7 @@ public class CompanionApproach : MonoBehaviour
             return;
         }
 
-        // 首次发现：检查遮挡、转向、播放问候。
+        // On first detection, check visibility, turn toward the user, and greet.
         if (!hasGreeted)
         {
             StopMoving();
@@ -407,7 +407,7 @@ public class CompanionApproach : MonoBehaviour
             return;
         }
 
-        // 退让目标必须位于身后可直达的导航区域。
+        // Retreat only to a directly reachable position on the NavMesh behind the companion.
         if (distance < personalDistance)
         {
             FaceDirection(direction);
@@ -432,7 +432,7 @@ public class CompanionApproach : MonoBehaviour
             return;
         }
 
-        // 走近、面对用户后邀请一次；隔墙时不提出邀请。
+        // Offer the invitation once when nearby and facing the user with a clear line of sight.
         if (!invitationOffered && meetingSpot != null &&
             acceptButton != null && declineButton != null &&
             distance <= stoppingDistance + 0.15f && !IsBlocked())

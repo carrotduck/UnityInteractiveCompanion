@@ -34,7 +34,7 @@ public class UserTargetMovement : MonoBehaviour
         if (keyboard.dKey.isPressed)
             direction.x += 1f;
 
-        // 归一化输入以保持斜向速度一致，碰撞阻挡交给角色控制器。
+        // Normalize input for consistent diagonal speed and let CharacterController handle collisions.
         controller.Move(
             direction.normalized * moveSpeed * Time.deltaTime);
     }

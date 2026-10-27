@@ -1,10 +1,10 @@
 # Open the demo
 
-## 1. Unity and character assets
+## 1. Open the project
 
 Open the repository folder as a project in **Unity 6000.6.5f1**. Allow the Package Manager to restore the dependencies.
 
-Import Unity Technologies' [First Person + Third Person | Character Controllers](https://marketplace.unity.com/packages/3d/characters/first-person-third-person-character-controllers-196526). The development project used Starter Assets 2.0.1; retain its `Assets/Starter Assets` folder layout and asset GUIDs. Keep the repository's `CompanionHuman.controller` when importing.
+The Starter Assets 2.0.1 character, locomotion animations, materials and textures are included with their original asset GUIDs.
 
 Choose **Window > TextMeshPro > Import TMP Essential Resources** to add the font and text resources used by the scene.
 

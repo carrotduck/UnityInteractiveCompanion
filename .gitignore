@@ -18,8 +18,10 @@
 /Assets/TextMesh Pro.meta
 /Assets/Starter Assets/**
 !/Assets/Starter Assets/**/
-!/Assets/Starter Assets/**/CompanionHuman.controller
-!/Assets/Starter Assets/**/CompanionHuman.controller.meta
+!/Assets/Starter Assets/Runtime.meta
+!/Assets/Starter Assets/Runtime/ThirdPersonController.meta
+!/Assets/Starter Assets/Runtime/ThirdPersonController/Character.meta
+!/Assets/Starter Assets/Runtime/ThirdPersonController/Character/**
 
 # IDE and OS files
 .vs/

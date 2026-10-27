@@ -40,10 +40,10 @@ A Unity prototype in which a virtual companion greets the user, follows them aro
 Use **Unity 6000.6.5f1**, with URP, AI Navigation and the Input System. Package versions are recorded in `Packages/manifest.json`.
 
 1. Clone this repository.
-2. Follow [asset setup](docs/SETUP.md) to restore the Starter Assets character and the Mixamo wave animation.
+2. Follow [asset setup](docs/SETUP.md) to import the text resources and restore the Mixamo wave animation.
 3. Open `Assets/Scenes/SampleScene.unity` and press Play.
 
-The scene, navigation data, custom animation controller and interaction scripts are included. The setup guide links the character and animation downloads.
+The character model, locomotion animations, materials, textures, scene, navigation data, custom animation controller and interaction scripts are included.
 
 ## Credits
 
