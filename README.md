@@ -1,4 +1,4 @@
-# Interactive Companion
+# Unity Interactive Companion
 
 A Unity prototype in which a virtual companion greets the user, follows them around obstacles, offers to guide them to a meeting point, and waits when they fall behind. Users can pause the interaction or change their plans along the way.
 

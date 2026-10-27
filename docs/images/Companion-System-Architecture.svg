@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1400" viewBox="0 0 2400 1400">
+<title>Unity Interactive Companion system architecture</title>
+<rect width="2400" height="1400" fill="#fff"/>
+<g font-family="Arial Narrow,Roboto Condensed,sans-serif" fill="#111">
+<text x="90" y="50" dominant-baseline="text-before-edge" font-size="68" fill="#111111">Unity Interactive Companion</text>
+<text x="90" y="140" dominant-baseline="text-before-edge" font-size="44" fill="#444444">System architecture</text>
+<rect x="90" y="550" width="500" height="340" fill="white" stroke="#777777" stroke-width="2"/>
+<rect x="90" y="550" width="500" height="90" fill="#e7e7e7" stroke="#777777" stroke-width="2"/>
+<text x="118" y="570" dominant-baseline="text-before-edge" font-size="46" fill="#111111">User input</text>
+<text x="118" y="670" dominant-baseline="text-before-edge" font-size="38" fill="#111111">WASD: move the user sphere</text>
+<text x="118" y="724" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Q / E: pause and resume</text>
+<text x="118" y="778" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Buttons: choose or reconsider</text>
+<rect x="780" y="260" width="630" height="250" fill="white" stroke="#777777" stroke-width="2"/>
+<rect x="780" y="260" width="630" height="90" fill="#e7e7e7" stroke="#777777" stroke-width="2"/>
+<text x="808" y="280" dominant-baseline="text-before-edge" font-size="46" fill="#111111">Scene information</text>
+<text x="808" y="380" dominant-baseline="text-before-edge" font-size="38" fill="#111111">User position and distance</text>
+<text x="808" y="434" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Wall occlusion / line of sight</text>
+<rect x="780" y="610" width="630" height="460" fill="white" stroke="#777777" stroke-width="2"/>
+<rect x="780" y="610" width="630" height="90" fill="#e7e7e7" stroke="#777777" stroke-width="2"/>
+<text x="808" y="630" dominant-baseline="text-before-edge" font-size="46" fill="#111111">Interaction state logic</text>
+<text x="808" y="730" dominant-baseline="text-before-edge" font-size="38" fill="#111111">CompanionApproach (C#)</text>
+<text x="808" y="784" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Follow / turn to user / choose</text>
+<text x="808" y="838" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Guide / arrive</text>
+<text x="808" y="892" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Pause and distance-based waiting</text>
+<text x="808" y="946" dominant-baseline="text-before-edge" font-size="38" fill="#111111">First-encounter greeting</text>
+<rect x="1620" y="260" width="690" height="270" fill="white" stroke="#777777" stroke-width="2"/>
+<rect x="1620" y="260" width="690" height="90" fill="#e7e7e7" stroke="#777777" stroke-width="2"/>
+<text x="1648" y="280" dominant-baseline="text-before-edge" font-size="46" fill="#111111">Navigation</text>
+<text x="1648" y="380" dominant-baseline="text-before-edge" font-size="38" fill="#111111">NavMeshAgent + baked NavMesh</text>
+<text x="1648" y="434" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Following, guiding and obstacle routing</text>
+<rect x="1620" y="660" width="690" height="270" fill="white" stroke="#777777" stroke-width="2"/>
+<rect x="1620" y="660" width="690" height="90" fill="#e7e7e7" stroke="#777777" stroke-width="2"/>
+<text x="1648" y="680" dominant-baseline="text-before-edge" font-size="46" fill="#111111">Animation</text>
+<text x="1648" y="780" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Animator + CompanionLocomotion</text>
+<text x="1648" y="834" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Idle / walk / run + greeting wave</text>
+<rect x="1620" y="1060" width="690" height="270" fill="white" stroke="#777777" stroke-width="2"/>
+<rect x="1620" y="1060" width="690" height="90" fill="#e7e7e7" stroke="#777777" stroke-width="2"/>
+<text x="1648" y="1080" dominant-baseline="text-before-edge" font-size="46" fill="#111111">Interface feedback</text>
+<text x="1648" y="1180" dominant-baseline="text-before-edge" font-size="38" fill="#111111">TextMeshPro dialogue</text>
+<text x="1648" y="1234" dominant-baseline="text-before-edge" font-size="38" fill="#111111">Accept / decline / call-back buttons</text>
+<polyline points="590,720 780,720" fill="none" stroke="#555" stroke-width="3"/><polygon points="780,720 763,710 763,730" fill="#555"/>
+<polyline points="1095,510 1095,610" fill="none" stroke="#555" stroke-width="3"/><polygon points="1095,610 1085,593 1105,593" fill="#555"/>
+<polyline points="1410,720 1515,720 1515,395 1620,395" fill="none" stroke="#555" stroke-width="3"/><polygon points="1620,395 1603,385 1603,405" fill="#555"/>
+<polyline points="1410,830 1620,830" fill="none" stroke="#555" stroke-width="3"/><polygon points="1620,830 1603,820 1603,840" fill="#555"/>
+<polyline points="1410,965 1515,965 1515,1195 1620,1195" fill="none" stroke="#555" stroke-width="3"/><polygon points="1620,1195 1603,1185 1603,1205" fill="#555"/>
+<polyline points="1955,530 1955,660" fill="none" stroke="#555" stroke-width="3"/><polygon points="1955,660 1945,643 1965,643" fill="#555"/>
+<text x="1980" y="572" dominant-baseline="text-before-edge" font-size="34" fill="#444444">Actual speed</text>
+</g></svg>
