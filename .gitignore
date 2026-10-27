@@ -1,0 +1,45 @@
+# Unity-generated files
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/Assets/_Recovery/
+/Assets/_Recovery.meta
+
+# Downloaded assets (restore through docs/SETUP.md)
+/Assets/CharacterAnimations/*.fbx
+/Assets/CharacterAnimations/*.fbx.meta
+/Assets/TextMesh Pro/
+/Assets/TextMesh Pro.meta
+/Assets/Starter Assets/**
+!/Assets/Starter Assets/**/
+!/Assets/Starter Assets/**/CompanionHuman.controller
+!/Assets/Starter Assets/**/CompanionHuman.controller.meta
+
+# IDE and OS files
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.suo
+*.user
+*.pidb
+*.booproj
+*.unityproj
+.DS_Store
+Thumbs.db
+
+# Local credentials and exports
+.env
+.env.*
+*.pfx
+*.p12
+*.keystore
+*.mp4
+*.unitypackage
